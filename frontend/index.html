@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    form {
+      display: inline-block;
+    }
+
+    #todo-list {
+      display: inline-block;
+      background-color: rgb(174, 224, 208);
+      width: 600px;
+      height: 550px;
+    }
+  </style>
+  <title>Add To-Do</title>
+</head>
+
+<body>
+  <form action="" method="post" onsubmit="event.preventDefault(); addToList();">
+    <div>
+      <label for="">Title</label>
+      <input type="text" name="title" id="title">
+    </div>
+    <div>
+      <label for="">Description</label>
+      <input type="text" name="description" id="description">
+    </div>
+    <div>
+      <label for="">dueDate</label>
+      <input type="date" name="dueDate" id="dueDate">
+    </div>
+    <div>
+      <label for="">Status</label>
+      <input type="text" name="status" id="status">
+    </div>
+    <input type="submit" value="Add">
+  </form>
+
+  <section id="todo-list">
+
+  </section>
+
+  <script>
+    let gridList = document.getElementById('todo-list');
+
+    async function addToList() {
+      const title = document.getElementById('title').value;
+      const description = document.getElementById('description').value;
+      const dueDate = document.getElementById('dueDate').value;
+      const status = document.getElementById('status').value;
+
+      const data = {
+        title,
+        description,
+        dueDate,
+        status
+      };
+
+      const response = await fetch('http://localhost:8000/todolist', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+    }
+
+    async function showTodoList() {
+      const response = await fetch('http://localhost:8000/todolist');
+      const todolist = await response.json();
+
+      todolist.forEach(item => {
+        const listItem = document.createElement('div');
+        listItem.innerHTML = `<p>Title: ${item.title}</p><p>Description: ${item.description}</p><p>Due Date: ${item.dueDate}</p><p>Status: ${item.status}</p>`;
+        gridList.appendChild(listItem);
+      });
+    }
+
+    showTodoList();
+  </script>
+</body>
+
+</html>
