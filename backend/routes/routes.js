@@ -7,8 +7,7 @@ router.post('/todolist', async (req, res) => {
 
   const todo = new Model({
     title: req.body.title,
-    description: req.body.description,
-    dueDate: req.body.dueDate,
+    createdAt: req.body.createdAt,
     status: req.body.status
   });
 
