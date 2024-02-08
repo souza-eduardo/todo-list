@@ -13,6 +13,12 @@ h1 {
   color: white;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 input[type="text"] {
   width: 350px;
   font-size: 1.2rem;
@@ -35,6 +41,8 @@ button {
 
 .add-btn {
   background-color: rgb(62, 192, 62);
+  max-width: 100px;
+  margin-top: 10px;
 }
 .add-btn:hover {
   background-color: rgb(47, 150, 47);
@@ -49,7 +57,7 @@ button {
 
 ol {
   padding: 0;
-  max-width: 450px;
+  max-width: 800px;
   margin: auto;
   margin-top: 12px;
 }
@@ -58,15 +66,15 @@ ol > li {
   display: flex;
   align-items: center;
   list-style: none;
-  font-size: 1.4rem;
-  font-weight: bold;
-  padding: 8px;
+  font-size: 1.1rem;
+  padding: 2px;
   background-color: rgb(228, 228, 228);
   margin-bottom: 12px;
   border: 3px solid rgba(104, 104, 104, 0.144);
   border-radius: 5px;
 }
 
-.text {
+p {
   flex: 1;
+  margin: 5px;
 }
