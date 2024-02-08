@@ -1,12 +1,11 @@
-import profilePic from './assets/anime-pfp.jpeg'
-import profilePic2 from './assets/cool-pfp.jpg'
-
-import Card from "./components/Card";
+import ListTodo from './components/ListTodo';
 
 function App() {
 
   return (
-    <></>
+    <>
+      <ListTodo />
+    </>
   );
 
 }
