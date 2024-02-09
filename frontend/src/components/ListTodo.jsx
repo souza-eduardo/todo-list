@@ -7,15 +7,15 @@ function ListTodo() {
   const [newTask, setNewTask] = useState('');
   const [newCreatedAt, setNewCreatedAt] = useState('');
   const [newStatus, setNewStatus] = useState('');
-  
+
   useEffect(() => {
     fetch('http://localhost:8000/todolist')
       .then(response => response.json())
       .then(tasks => setTasks(tasks))
       .catch(error => console.error(`Error fetching tasks:`, error));
-    }, []);
+  }, []);
 
-  function  handleInputChange(e) {
+  function handleInputChange(e) {
     setNewTask(e.target.value);
   }
 
@@ -24,7 +24,7 @@ function ListTodo() {
     if (newTask.trim() !== '') {
       fetch('http://localhost:8000/todolist', {
         method: 'POST',
-        headers: {'content-type': 'application/json'},
+        headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
           title: newTask
         })
@@ -34,10 +34,29 @@ function ListTodo() {
         .catch(error => console.error(`Error adding task:`, error));
       setNewTask('');
     }
+  }
 
+  function completeTask(index) {
+    
+    fetch('http://localhost:8000/todolist/' + tasks[index]._id, {
+      method: 'PATCH',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ 
+        status: 'Completed'
+      })
+    })
+      .then(response => response.json())
+      .then(completedTask => setTasks(t => [...t, completedTask]))
+      .catch(error => console.error(`Error finishing task:`, error));
   }
 
   function removeTask(index) {
+
+    fetch('http://localhost:8000/todolist/' + tasks[index]._id, {
+      method: 'DELETE'
+    })
+      .then(res => res);
+
     const updatedTasks = tasks.filter((_, i) => i !== index);
     setTasks(updatedTasks);
   }
@@ -61,7 +80,9 @@ function ListTodo() {
           <li key={index}>
             <p className="text">{task.title}</p>
             <p>Created at: {task.createdAt.split('T')[0]}</p>
-            <p>Status: {task.status}</p>
+            <p>Status: <b>{task.status}</b></p>
+            <button className="done-btn material-symbols-outlined" onClick={() => completeTask(index)}>done</button>
+            <button className="edit-btn material-symbols-outlined">edit</button>
             <button className="delete-btn" onClick={() => removeTask(index)}>Delete</button>
           </li>
         )}

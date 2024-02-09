@@ -5,7 +5,7 @@ body {
 .todo-list {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-  margin-top: 60px; 
+  margin-top: 60px;
 }
 
 h1 {
@@ -31,7 +31,7 @@ input[type="text"] {
 button {
   font-size: 1.1rem;
   font-weight: bold;
-  padding: 10px 15px;
+  padding: 10px 14px;
   color: white;
   border: none;
   border-radius: 5px;
@@ -55,9 +55,25 @@ button {
   background-color: rgb(167, 0, 0);
 }
 
+.edit-btn, .done-btn {
+  background-color: rgb(0, 79, 226);
+  padding: 4px;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.done-btn {
+  background-color: rgb(62, 192, 62);
+}
+
 ol {
   padding: 0;
-  max-width: 800px;
+  max-width: 840px;
   margin: auto;
   margin-top: 12px;
 }
